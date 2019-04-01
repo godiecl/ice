@@ -1,0 +1,4 @@
+rootProject.name = 'ice'
+include 'client'
+include 'server'
+
