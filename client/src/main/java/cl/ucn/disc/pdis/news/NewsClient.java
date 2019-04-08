@@ -30,6 +30,14 @@ public final class NewsClient {
         // Properties
         final Properties properties = Util.createProperties(args);
         properties.setProperty("Ice.Package.model", "cl.disc.ucn.pdis.news.zeroice");
+        // https://doc.zeroc.com/ice/latest/property-reference/ice-trace
+        properties.setProperty("Ice.Trace.Admin.Properties", "1");
+        properties.setProperty("Ice.Trace.Locator", "2");
+        properties.setProperty("Ice.Trace.Network", "3");
+        properties.setProperty("Ice.Trace.Protocol", "1");
+        properties.setProperty("Ice.Trace.Slicing", "1");
+        properties.setProperty("Ice.Trace.ThreadPool", "1");
+        properties.setProperty("Ice.Compression.Level", "9");
 
         InitializationData initializationData = new InitializationData();
         initializationData.properties = properties;
@@ -38,7 +46,7 @@ public final class NewsClient {
 
         try (Communicator communicator = Util.initialize(initializationData)) {
 
-            final ObjectPrx proxy = communicator.stringToProxy(NewsAPI.class.getName() + ":default -p 10000");
+            final ObjectPrx proxy = communicator.stringToProxy(NewsAPI.class.getName() + ":default -p 10000 -z");
             final NewsAPIPrx newsAPI = NewsAPIPrx.checkedCast(proxy);
 
             if (newsAPI == null) {
