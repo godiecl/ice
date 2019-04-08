@@ -29,9 +29,12 @@ public final class NewsServer {
         final Properties properties = Util.createProperties(args);
         properties.setProperty("Ice.Package.model", "cl.disc.ucn.pdis.news.zeroice");
         // https://doc.zeroc.com/ice/latest/property-reference/ice-trace
-        properties.setProperty("Ice.Trace.Network", "1");
+        properties.setProperty("Ice.Trace.Admin.Properties", "1");
+        properties.setProperty("Ice.Trace.Locator", "2");
+        properties.setProperty("Ice.Trace.Network", "3");
         properties.setProperty("Ice.Trace.Protocol", "1");
         properties.setProperty("Ice.Trace.Slicing", "1");
+        properties.setProperty("Ice.Trace.ThreadPool", "1");
         properties.setProperty("Ice.Compression.Level", "9");
         properties.setProperty("Ice.Plugin.Slf4jLogger.java", "cl.ucn.disc.pdis.news.ice.Slf4jLoggerPluginFactory");
 
@@ -43,7 +46,7 @@ public final class NewsServer {
         try (Communicator communicator = Util.initialize(initializationData)) {
 
             // The adapter
-            final ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("NewsAPIAdapter", "default -p 10000");
+            final ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("NewsAPIAdapter", "default -p 10000 -z");
 
             // The API
             final NewsAPI newsAPI = new NewsAPIImpl();
