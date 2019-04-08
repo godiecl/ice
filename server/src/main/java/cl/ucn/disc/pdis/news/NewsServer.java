@@ -28,6 +28,12 @@ public final class NewsServer {
         // Properties
         final Properties properties = Util.createProperties(args);
         properties.setProperty("Ice.Package.model", "cl.disc.ucn.pdis.news.zeroice");
+        // https://doc.zeroc.com/ice/latest/property-reference/ice-trace
+        properties.setProperty("Ice.Trace.Network", "1");
+        properties.setProperty("Ice.Trace.Protocol", "1");
+        properties.setProperty("Ice.Trace.Slicing", "1");
+        properties.setProperty("Ice.Compression.Level", "9");
+        properties.setProperty("Ice.Plugin.Slf4jLogger.java", "cl.ucn.disc.pdis.news.ice.Slf4jLoggerPluginFactory");
 
         InitializationData initializationData = new InitializationData();
         initializationData.properties = properties;
